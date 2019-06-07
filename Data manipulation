@@ -1,0 +1,105 @@
+library(readxl)
+rd<-read.csv(file="C:\\Users\\rdeshpande-sa\\Desktop\\rd.csv")
+rd
+head(rd)
+colnames(rd)
+rd[1:2,]
+library(dplyr)
+rownames(rd)
+nrow(rd)
+rd[152:153,]
+rd$Ozone[47]
+sum(is.na(rd$Ozone))
+mean(rd$Ozone,na.rm = TRUE)
+mean(rd$Solar.R,na.rm = TRUE)
+mean(rd[which(rd$Ozone>31 & rd$Temp>90),]$Solar.R)
+rd[which(rd$Ozone>31 & rd$Temp>90),]
+
+rd1<-na.omit(rd[rd$Ozone>31 & rd$Temp>90,])
+rd1
+mean(rd1$Solar.R)
+
+rd2<-na.omit(rd[rd$Month==6,])
+mean(rd2$Temp)
+
+mean(rd[which(rd$Month == 6),]$Temp)
+
+rd3<-rd[rd$Month==5,,drop=FALSE]
+rd3
+max(rd3$Ozone,na.rm = TRUE)
+getwd()
+
+rd4<-list.files("rd")
+rd4
+
+mean1<-function(x, na.rm=TRUE){
+  nc<-ncol(x)
+  means<-numeric(nc)
+  for(i in 1:nc){
+    means[i]<-mean(x[,i],na.rm=TRUE)
+  }
+  means
+}
+mean1(rd)
+
+
+columnmean(rd)
+
+mean1<-function(x,na.rm=TRUE){
+  nc<-ncol(x)
+  m1<-numeric(nc)
+  for(i in 1:nc){
+    m1[i]<-mean(x[,i],na.rm=TRUE)
+  }
+  m1
+}
+
+make.pow<-function(n){
+  pow<-function(x){
+    x^n
+  }
+  pow
+}
+cube<-make.pow(3)
+cube(2)
+
+square<-make.pow(2)
+square(16)
+
+ls(environment(cube))
+
+cube<-function(x,y){
+  x^3
+}
+cube(3)
+
+
+
+str(rd)
+summary(rd)
+
+rd3<-function(x){
+  function(n){
+    x*n
+  }
+}
+rd4<-rd3(10)
+rd4(5)
+
+rd4(100)
+
+as.list(environment(rd3))
+as.list(environment(rd4))
+
+b=30
+h<-function(){
+  a=100
+  b=200
+  f()
+}
+f<-function(){
+  g<-function() {a+b}
+  a=10
+  g()
+}
+h()
